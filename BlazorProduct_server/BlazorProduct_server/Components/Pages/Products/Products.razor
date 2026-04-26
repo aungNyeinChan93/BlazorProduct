@@ -9,7 +9,10 @@
     {
         foreach (var product in products)
         {
-            <p class="bg-success my-2 rounded p-2"> @product.Name</p>
+            <div class="@(product.isStock ? "bg-success":"bg-danger") d-flex justify-content-between my-2 rounded p-2">
+                <p>@product.Name</p>
+                <a href="/products/@product.ProductId" class="btn btn-info"  > Detail</a>
+            </div>
         }        
     }
 </section>

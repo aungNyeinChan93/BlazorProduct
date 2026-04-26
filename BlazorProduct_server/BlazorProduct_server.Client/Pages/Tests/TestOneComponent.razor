@@ -1,0 +1,143 @@
+﻿@page "/tests/one";
+@using BlazorProduct_server.Client.Models
+
+@rendermode InteractiveWebAssembly
+
+
+<h3>TestOneComponent</h3>
+
+TestProperties: <br />
+    <select @bind="testValue">
+        @foreach (var prop in test!.TestPropetries)
+        {
+                <option value="@prop.Value">@prop.Key</option>
+        }
+    </select>
+
+    <br />
+
+Test Value :@testValue
+
+
+ChangeStatus : @(test.Status ? "Active":"Inactive") 
+<br />
+<InputCheckbox @bind-Value="test.Status" />
+
+<br />
+<button type="button" class="my-4 rounded-2xl bg-green-500 p-2" @onclick="()=> test.Status = !test.Status" > Status toggle</button>
+
+<input type="text" @bind="test.Name" @bind:event="oninput" />
+<br />
+<input class="bg-red-600 p-2" type="text" @oninput="ChangeInput" />
+<br />
+Name : @test.Name
+
+<br />
+TestStr : @testStr
+
+<br />
+
+<section>
+    <h3>Test Lists</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">No</th>
+                <th scope="col">Name</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var test in tests)
+            {                
+                <tr>
+                    <th scope="row">@test.TestId</th>
+                    <td>
+                        @test.Name
+                        <input class="form-control" type="text" @bind="test.Name" @bind:event="oninput"/>
+                    </td>
+                    <td>
+                        @(test.Status ? "Active":"Inactive")
+                        <input type="checkbox" @bind="test.Status" />
+                    </td>
+                    <td>
+                        <a href="#">Edit</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <h4>Test Detail</h4>
+        <ul class="list-group">
+            @foreach (var test in tests)
+            {
+            <li @key="test.TestId" class="list-group-item">
+                <p>@test.Name</p>
+                <p>@(test.Status? "Online":"OffLine")</p>
+            </li>
+            }
+        </ul>
+</section>
+
+@code {
+
+    public string? testStr { get; set; }
+
+    public Test test { get; set; } = new Test()
+    {
+        TestId = 1,
+        Name = "test one",
+        Status = false,
+        TestPropetries = new List<TestProps>()
+        {
+            new TestProps {TestPropsId = 1,Key = "color",Value="red"},
+            new TestProps {TestPropsId = 2,Key = "style",Value="inner"},
+            new TestProps {TestPropsId = 1,Key = "mode",Value="fast"},
+        }
+    };
+
+    public string testValue { get; set; } = default!;
+
+
+    private void ChangeInput(ChangeEventArgs args)
+    {
+        testStr = args!.Value!.ToString() ?? "";
+        test.Name = args.Value?.ToString() ?? "";
+    }
+
+    List<Test> tests = new ();
+
+    protected override void OnInitialized()
+    {
+        tests =
+            [
+           new Test
+           {
+                    TestId = 1,
+                    Name = "test one",
+                    Status = false,
+                    TestPropetries = new List<TestProps>()
+                    {
+                        new TestProps {TestPropsId = 1,Key = "color",Value="red"},
+                        new TestProps {TestPropsId = 2,Key = "style",Value="inner"},
+                        new TestProps {TestPropsId = 1,Key = "mode",Value="fast"},
+                    }
+           },
+            new Test
+           {
+                    TestId = 2,
+                    Name = "test Two",
+                    Status = false,
+                    TestPropetries = new List<TestProps>()
+                    {
+                        new TestProps {TestPropsId = 1,Key = "color",Value="red"},
+                        new TestProps {TestPropsId = 2,Key = "style",Value="inner"},
+                        new TestProps {TestPropsId = 1,Key = "mode",Value="fast"},
+                    }
+           },
+        ];
+    }
+
+}
