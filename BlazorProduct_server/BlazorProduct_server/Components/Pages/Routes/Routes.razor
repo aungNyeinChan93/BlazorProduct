@@ -17,6 +17,7 @@ Parameter one :@Id <br />
 Parameter Two :@Name <br />
 Parameter Three :@(IsSuccess ? "success":"fail") <br />
 Parameter catch all :@CatchAll <br />
+Parameter Grade :@grade <br />
 @message
 
 
@@ -31,6 +32,9 @@ Parameter catch all :@CatchAll <br />
     [Parameter]
     public int Id { get; set; }
 
+    [SupplyParameterFromQuery(Name = "Grade")]
+    public  string grade { get; set; }
+
     [Parameter]
     public string? Name { get; set; }
 
@@ -44,11 +48,12 @@ Parameter catch all :@CatchAll <br />
 
     private void LoadParameter()
     {
+        _NavigationManger.NavigateTo("/routes?id=123&name=susu");
         var uri = new Uri(_NavigationManger.Uri);
         var query = QueryHelpers.ParseQuery(uri.Query);
         this.Id = int.Parse(query["id"]!);
         this.Name = query["name"];
-        this.IsSuccess = bool.Parse(query["isSuccess"]!);
+        // this.IsSuccess = bool.Parse(query["isSuccess"]!);
     }
 
     private void Test()
