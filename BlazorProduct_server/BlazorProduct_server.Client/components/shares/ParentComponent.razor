@@ -5,13 +5,15 @@
 
     <h3>@message</h3>
     <CascadingValue Value="childProp">
-        <ChildComponent props="childProp" />
-        <ChildComponent ClickFromParent="ClickFromParent" props="childProp">
-            Render Fragment from parent
-            Render Fragment from parent
-            Render Fragment from parent
-            Render Fragment from parent
-        </ChildComponent>
+        <CascadingValue Value="drinks" Name="drinks">
+            <ChildComponent />
+            <ChildComponent ClickFromParent="ClickFromParent" props="childProp">
+                Render Fragment from parent
+                Render Fragment from parent
+                Render Fragment from parent
+                Render Fragment from parent
+            </ChildComponent>
+        </CascadingValue>
     </CascadingValue>
 </div>
 
@@ -33,4 +35,10 @@
     {
         message = "Click from child the parent method!";
     }
+
+    List<Drink> drinks = new List<Drink>
+    {
+        new Drink{DrinkId = 1,Name="Coffee",Type= "Expresso"},
+        new Drink{DrinkId = 2,Name="SoftDrink",Type= "Shark"},
+    };
 }

@@ -10,7 +10,7 @@
             </svg>
 
             <strong class="block flex-1 leading-tight font-semibold">
-               @(props.Message)
+               @(props.Message is not null? props.Message : cascadeProps.Message)
             </strong>
             
             <br />
@@ -40,6 +40,9 @@
 {
     [Parameter]
     public ChildProps props { get; set; } = new();
+
+    [CascadingParameter]
+    public ChildProps cascadeProps { get; set; } = new();
 
     [Parameter]
     public RenderFragment? ChildContent { get; set; }

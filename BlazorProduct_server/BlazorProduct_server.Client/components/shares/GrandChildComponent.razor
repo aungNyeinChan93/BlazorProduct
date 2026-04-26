@@ -7,9 +7,21 @@
 <p>@props.Message</p>
 <p>@props.test?.Status </p>
 
+<div class="my-2 rounded rounded-sm bg-cyan-400 p-4">
+    @foreach (var drink in drinks)
+    {
+        <div>
+            <p>@drink.Name</p>
+            <p>@drink.Type</p>
+        </div>
+    }
+</div>
 
 
 @code {
     [CascadingParameter]
     public ChildProps props { get; set; } = new();
+
+    [CascadingParameter(Name ="drinks")]
+    public List<Drink> drinks { get; set; } = new();
 }
