@@ -12,18 +12,24 @@
 
 @foreach (var test in tests)
     {
-        <TestComponent AddFav="UpdateTotalCount" test="test" DeleteTest="DeleteTest" />
+        <TestComponent selectId="selectId" SelectEvent="SelectedTest" AddFav="UpdateTotalCount" test="test" DeleteTest="DeleteTest" />
     }
 </div>
 
 <p>Fav Count :@count</p>
+<br />
 
-
+<p>Selected Test ==> @selectMessage</p>
+ 
 
 @code {
     public List<Test> tests { get; set; } = default!;
 
+    public string selectMessage { get; set; } = "";
+
     public int count { get; set; } = 0;
+
+    public int selectId { get; set; }
 
     protected override void OnInitialized()
     {
@@ -73,4 +79,15 @@
             count--;
         }
     }
+
+    private void SelectedTest(int id)
+    {
+        var t = tests.FirstOrDefault(t => t.TestId == id);
+        if (t is not null)
+        {
+            selectId = t.TestId; 
+            selectMessage = $"{t.Name} is selected";   
+        }
+    }
+
 }
