@@ -22,7 +22,7 @@
             @test.Name
         </h3>
 
-        <button class="btn btn-primary my-4" @onclick="() => SelectHandle(test.TestId)">Select Test</button>
+        <button class="btn btn-primary my-4" @onclick="(arg) => SelectHandle(arg,test.TestId)">Select Test</button>
 
         <ButtonOneComponent test="test" TestId="@test.TestId" DeleteEvent="DeleteTest" />
             
@@ -55,8 +55,11 @@
     public EventCallback<int> SelectEvent { get; set; }
 
 
-    private async Task SelectHandle(int id)
+    private async Task SelectHandle(MouseEventArgs args ,int id)
     {
-        await SelectEvent.InvokeAsync(id);
+        if (args.Type == "click")
+        {
+            await SelectEvent.InvokeAsync(id);
+        }
     }
 }

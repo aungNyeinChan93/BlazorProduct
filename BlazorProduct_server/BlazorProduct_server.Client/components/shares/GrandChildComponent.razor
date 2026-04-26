@@ -1,0 +1,15 @@
+﻿<h3>GrandChildComponent</h3>
+
+
+
+<p>@props.test?.Name ==> cascasding Value</p>
+
+<p>@props.Message</p>
+<p>@props.test?.Status </p>
+
+
+
+@code {
+    [CascadingParameter]
+    public ChildProps props { get; set; } = new();
+}

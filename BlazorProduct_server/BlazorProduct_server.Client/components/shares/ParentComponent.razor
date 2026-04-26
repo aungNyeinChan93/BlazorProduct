@@ -1,0 +1,36 @@
+﻿
+
+
+<div class="min-h-screen min-w-100 bg-green-100 p-2">
+
+    <h3>@message</h3>
+    <CascadingValue Value="childProp">
+        <ChildComponent props="childProp" />
+        <ChildComponent ClickFromParent="ClickFromParent" props="childProp">
+            Render Fragment from parent
+            Render Fragment from parent
+            Render Fragment from parent
+            Render Fragment from parent
+        </ChildComponent>
+    </CascadingValue>
+</div>
+
+
+@code
+{
+    public string messageForGrandChild { get; set; } = "Message for grand child from parent";
+    public string message { get; set; } = string.Empty;
+
+    public ChildProps childProp = new ChildProps() {ChildPropsId = 1,Message = "This is props from parent" };
+
+    protected override void OnInitialized()
+    {
+        this.childProp.test = new Test() { Name = "test name one from parent",Status =true,TestPropetries = null };
+    }
+
+
+    private void ClickFromParent()
+    {
+        message = "Click from child the parent method!";
+    }
+}
