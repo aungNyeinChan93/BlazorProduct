@@ -1,0 +1,49 @@
+﻿@* @page "/routes"
+@page "/routes/{id:int}"
+@page "/routes/{id:int}/{name}"
+@page "/routes/{id:int}/{name}/{isSuccess:bool}"
+@page "/routes/catchAll/{*catchAll}" *@
+
+@inject NavigationManager _NavigationManger;
+@rendermode InteractiveWebAssembly
+
+<h3>Routes</h3>
+
+Parameter one :@Id
+<br />
+Parameter Two :@Name
+<br />
+Parameter Three :@(IsSuccess ? "success" : "fail")
+<br />
+Parameter catch all :@CatchAll
+<br />
+@message 
+
+<br />
+<a href="/routes?id=123&name=koko">Test Query Parameter</a>
+<br />
+<button type="button" class="btn btn-info" @onclick="() => Test()">Laod</button>
+
+
+@code
+{
+    [Parameter]
+    public int Id { get; set; }
+
+    [Parameter]
+    public string? Name { get; set; }
+
+    [Parameter]
+    public bool IsSuccess { get; set; }
+
+    [Parameter]
+    public string CatchAll { get; set; }
+
+    public string message { get; set; } = "default";
+
+    private void Test()
+    {
+        message = "clicked!";
+        StateHasChanged();
+    }
+}

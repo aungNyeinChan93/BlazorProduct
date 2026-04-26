@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="BlazoProduct_server01/BlazoProduct_server01.csproj" Id="8f5e4a96-134a-4f50-939b-277a5fad1c13" />
     <Project Path="BlazorProduct_Application/BlazorProduct_Application.csproj" />
     <Project Path="BlazorProduct_Database/BlazorProduct_Database.csproj" />
     <Project Path="BlazorProduct_Domain/BlazorProduct_Domain.csproj" />
