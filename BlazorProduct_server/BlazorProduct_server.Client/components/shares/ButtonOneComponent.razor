@@ -1,0 +1,25 @@
+﻿
+
+
+<div>
+    <button class="mx-2 rounded rounded-xl bg-red-400 p-2 hover:bg-red-500" type="button" @onclick="() => handleClick()">Delete</button>
+</div>
+
+
+@code{
+
+    [Parameter]
+    public int TestId { get; set; }
+
+    [Parameter]
+    public Test? test { get; set; } = new();
+
+    [Parameter]
+    public EventCallback<Test> DeleteEvent { get; set; }
+
+    private async Task handleClick()
+    {
+        // await DeleteEvent.InvokeAsync(test!.TestId);
+        await DeleteEvent.InvokeAsync(test);
+    }
+}
