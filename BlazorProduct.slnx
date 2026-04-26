@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="BlazorProduct_Application/BlazorProduct_Application.csproj" />
+    <Project Path="BlazorProduct_Database/BlazorProduct_Database.csproj" />
+    <Project Path="BlazorProduct_Domain/BlazorProduct_Domain.csproj" />
+    <Project Path="BlazorProduct_server/BlazorProduct_server.Client/BlazorProduct_server.Client.csproj" />
+    <Project Path="BlazorProduct_server/BlazorProduct_server/BlazorProduct_server.csproj" />
+  </Folder>
+</Solution>

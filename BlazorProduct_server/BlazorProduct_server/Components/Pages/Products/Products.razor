@@ -1,0 +1,28 @@
+﻿@page "/products"
+@inject IProductService ProductService;
+
+<PageTitle>Products</PageTitle>
+
+<section>
+    <h3>Products</h3>
+    @if (products is not null)
+    {
+        foreach (var product in products)
+        {
+            <p class="bg-success my-2 rounded p-2"> @product.Name</p>
+        }        
+    }
+</section>
+
+@code {
+    public List<Product> products { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var p = await ProductService.GetAllProductsAsync();
+        if (p is not null)
+        {
+            products = p;
+        }
+    }
+}
